@@ -14,13 +14,10 @@ class Book{
     public $rate;
     public $isbn;
 
-    public function getLentBook(){
-
-    }
-
-    public function lentBook(){
-        $lents = new LentBook();
+    public function lentBook($request){
+        
+        $lents = new lentBook();
+        $lents->borrowBook($request);
         
     }
-
 }

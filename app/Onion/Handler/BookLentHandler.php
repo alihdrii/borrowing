@@ -17,7 +17,7 @@ class BookLentHandler{
     }
 
     public function handle($request){
-        return $this->service->borrow($request);
+        return $this->service->lentBook($request);
     }
 
 }

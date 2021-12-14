@@ -9,5 +9,9 @@ class LentBook{
     public $user_id;
     public $started_at;
     public $lent_day_num;
-            
+
+    public function borrowBook($request){
+        
+    }
+
 }

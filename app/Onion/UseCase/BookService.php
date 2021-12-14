@@ -25,9 +25,10 @@ class BookService implements BookUseCaseInterface{
 
     public function lentBook($request)
     {
-        // $this->repository->lentBook($request);
-        $root = new Book();
-        $root->lentBook();
+        if($this->repository->checkByIdIfNotLoanCreate($request->id)){
+            $this->repository->lentBook($request);
+        }
+
     }   
 
 }
