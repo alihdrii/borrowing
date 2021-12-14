@@ -2,11 +2,10 @@
 
 namespace App\Onion\UseCase;
 
-use App\Onion\Domain\Entity\Book;
 use App\Onion\Service\BookRepositoryInterface;
 use App\Onion\UseCase\BookUseCaseInterface;
 
-class BookService implements BookUseCaseInterface{
+class BookUseCase implements BookUseCaseInterface{
 
     private $repository;
 
@@ -25,10 +24,10 @@ class BookService implements BookUseCaseInterface{
 
     public function lentBook($request)
     {
-        if($this->repository->checkByIdIfNotLoanCreate($request->id)){
+        if($this->repository->checkLentBookByUserId($request->id)){
             $this->repository->lentBook($request);
         }
-
-    }   
+        
+    }
 
 }

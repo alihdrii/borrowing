@@ -6,6 +6,5 @@ interface BookUseCaseInterface{
     
     public function index();
     public function show($book_id);
-    public function lentBook($request);
 
 }

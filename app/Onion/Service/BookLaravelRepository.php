@@ -4,7 +4,7 @@ namespace App\Onion\Service;
 
 use App\Models\Book;
 use App\Models\lent_book;
-use App\Onion\Domain\Entity\Book as EntityBook;
+use App\Onion\Entity\Book as EntityBook;
 use App\Onion\Service\BookRepositoryInterface;
 
 class BookLaravelRepository implements BookRepositoryInterface{
@@ -24,6 +24,7 @@ class BookLaravelRepository implements BookRepositoryInterface{
         $book->publisher = $elequent->publisher;
         $book->isbn = $elequent->isbn;
         $book->published_at = $elequent->published_at;
+        
         return $book;
     }
 
@@ -47,9 +48,9 @@ class BookLaravelRepository implements BookRepositoryInterface{
 
     }
 
-    public function checkByIdIfNotLoanCreate($request){
+    public function checkLentBookByUserId($request){
         if(lent_book::where('book_id' , $request->book_id)->exist()){
-            return $this->lentBook($request);
+            return true;
         }
         return false;
     }

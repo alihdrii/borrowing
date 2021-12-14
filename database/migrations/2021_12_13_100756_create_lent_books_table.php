@@ -20,7 +20,6 @@ class CreateLentBooksTable extends Migration
             $table->timestamp('started_at');
             $table->timestamp('lent_day_num');
             $table->timestamps();
-            $table->foreign('book_id')->references('id')->on('books');
         });
     }
 
