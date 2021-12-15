@@ -2,8 +2,8 @@
 
 namespace App\Onion\UseCase;
 
-use App\Onion\Service\BookRepositoryInterface;
-use App\Onion\UseCase\BookUseCaseInterface;
+use App\Onion\Driver\BookRepositoryInterface;
+use App\Onion\UseCase\Interfaces\BookUseCaseInterface;
 
 class BookUseCase implements BookUseCaseInterface{
 

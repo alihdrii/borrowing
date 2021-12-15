@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Onion\Service;
+namespace App\Onion\Driver;
 
 use App\Models\lent_book;
-use App\Onion\Service\UserRepositoryInterface;
+use App\Models\User;
+use App\Onion\Driver\UserRepositoryInterface;
 
 class UserLaravelRepository implements UserRepositoryInterface{
 
     public function getById(int $id){
-        return ;
+        return User::find($id);
     }
 
     public function lentBook($request){

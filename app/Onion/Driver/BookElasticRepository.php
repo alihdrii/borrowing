@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Onion\Service;
+namespace App\Onion\Driver;
 
 use App\Models\Book;
 use App\Models\lent_book;
@@ -17,6 +17,11 @@ class BookElasticRepository implements BookRepositoryInterface{
     public function get(int $id){
         return ;
     }
+
+    public function getById(int $id){
+        return ;
+    }
+
 
     public function lentBook($request){
         return ;

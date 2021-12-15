@@ -3,8 +3,8 @@
 namespace App\Onion\UseCase;
 
 use App\Onion\Entity\Book;
-use App\Onion\Service\UserRepositoryInterface;
-use App\Onion\UseCase\BookUseCaseInterface;
+use App\Onion\Driver\UserRepositoryInterface;
+use App\Onion\UseCase\Interfaces\UserUseCaseInterface;
 
 class UserUseCase implements UserUseCaseInterface{
 
@@ -12,9 +12,9 @@ class UserUseCase implements UserUseCaseInterface{
 
     public function __construct(UserRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->repository = $repository;                            
     }
-
+       
     public function show($book_id){
 
     }

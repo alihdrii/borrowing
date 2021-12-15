@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Onion\Service;
+namespace App\Onion\Driver;
 
 interface UserRepositoryInterface{
 

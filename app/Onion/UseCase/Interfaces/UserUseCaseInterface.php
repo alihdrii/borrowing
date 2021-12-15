@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Onion\UseCase;
+namespace App\Onion\UseCase\Interfaces;
 
 interface UserUseCaseInterface{
     

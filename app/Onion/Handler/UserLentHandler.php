@@ -16,7 +16,7 @@ class UserLentHandler{
     public function __construct($request)
     {
         $this->request = $request;
-        $this->prepareDependency();                
+        $this->prepareDependency();
     }
 
     public function handle(){

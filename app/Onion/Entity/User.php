@@ -7,5 +7,6 @@ class Book{
     public $id;
     public $name;
     public $password;
+    public $email;
     
 }

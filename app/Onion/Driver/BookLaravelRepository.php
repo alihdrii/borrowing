@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Onion\Service;
+namespace App\Onion\Driver;
 
 use App\Models\Book;
 use App\Models\lent_book;
@@ -12,6 +12,10 @@ class BookLaravelRepository implements BookRepositoryInterface{
     public function getAll()
     {
         return Book::all()->toArray();
+    }
+
+    public function getById(int $id){
+        return Book::find($id);
     }
 
     public function get(int $id){
