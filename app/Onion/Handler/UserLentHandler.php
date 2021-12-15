@@ -2,11 +2,11 @@
 
 namespace App\Onion\Handler;
 
-// use App\Onion\Service\BookElasticRepository;
-use App\Onion\Service\UserLaravelRepository;
-use App\Onion\UseCase\UserUseCase;
-
-// use Onion\UseCase\BookUseCaseInterface;
+use App\Onion\Service\UserExist;
+use App\Onion\Service\BookExist;
+use App\Onion\Driver\UserLaravelRepository;
+use App\Onion\Driver\BookLaravelRepository;
+use App\Onion\UseCase\BorrowBookUseCase;
 
 class UserLentHandler{
 
@@ -16,27 +16,14 @@ class UserLentHandler{
     public function __construct($request)
     {
         $this->request = $request;
-        $this->prepareDependency();
     }
 
     public function handle(){
-        return (new UserUseCase($this->repository))->lentBook($this->request);
+
+        $user_id = $this->request->user_id;
+        $book_id = $this->request->book_id; 
+                                           
+        return (new BorrowBookUseCase(new UserExist(new UserLaravelRepository(), $user_id) , new BookExist(new BookLaravelRepository(), $book_id )))->lent();
+
     }
-
-    public function prepareDependency(){
-        $this->repository = $this->getRepo($this->request->header('REPO'));
-    }
-
-    private function getRepo($repo){
-
-        switch ($repo){           
-            case 'elequent':
-                return new UserLaravelRepository();
-            // case 'elastic':
-            //     return new BookElasticRepository();
-            default : 
-                return new UserLaravelRepository();
-        }
-    }    
-
 }

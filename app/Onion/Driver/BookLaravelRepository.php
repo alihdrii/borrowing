@@ -5,7 +5,7 @@ namespace App\Onion\Driver;
 use App\Models\Book;
 use App\Models\lent_book;
 use App\Onion\Entity\Book as EntityBook;
-use App\Onion\Service\BookRepositoryInterface;
+use App\Onion\Driver\BookRepositoryInterface;
 
 class BookLaravelRepository implements BookRepositoryInterface{
 
