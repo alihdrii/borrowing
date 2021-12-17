@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/books' , [BookController::Class , 'index']);
+Route::get('/return' , [BookController::Class , 'show']);
 
 Route::post('/lent-book' , [UserController::Class , 'lending']);
 

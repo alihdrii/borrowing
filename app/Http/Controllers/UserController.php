@@ -3,21 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LendingRequest;
-use App\Onion\Handler\UserLentHandler;
-use Illuminate\Http\Request;
+use App\Onion\Handler\UserHandler;
 use Illuminate\Http\Response;
-
 
 class UserController extends Controller
 {
-    //
-
-    // public function show(Request $request){
-    //     return Response ((new BookLentHandler($request))->handle());
-    // }
 
     public function lending(LendingRequest $request){
-        return Response ((new UserLentHandler($request))->handle());
+
+        return Response((new UserHandler($request))->borrowBook()); 
+
     }
 
 }
