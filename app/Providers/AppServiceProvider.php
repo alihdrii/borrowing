@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Onion\Driver\BookElasticRepository;
 use App\Onion\Driver\BookLaravelRepository;
+use App\Onion\Driver\UserElasticRepository;
 use App\Onion\Driver\UserLaravelRepository;
 use App\Onion\Service\BookService;
 use App\Onion\Service\BookServiceInterface;
+use App\Onion\Service\UserServiceInterface;
 use App\Onion\Service\UserService;
 use App\Onion\UseCase\BookUseCase;
 use App\Onion\UseCase\Interfaces\BookUseCaseInterface;
@@ -23,19 +25,22 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
-        // $this->app->bind('BookServiceInterface' , function($app){
-        //     return new BookService(new BookLaravelRepository());
-        // });
-        // $this->app->bind(BookServiceInterface::class, BookService::class);
-
-
-        $this->app->bind(BookUseCaseInterface::class, function ($app) {
+        $this->app->bind(BookServiceInterface::class, function ($app) {
             if (request()->has('repo')) 
                 $repository = new BookLaravelRepository();
             else
                 $repository = new BookElasticRepository();
 
-            return new BookUseCase(new BookService(new $repository));
+            return new BookService(new $repository);
+        });
+
+        $this->app->bind(UserServiceInterface::class, function ($app) {
+            if (request()->has('repo')) 
+                $repository = new UserLaravelRepository();
+            else
+                $repository = new UserElasticRepository();
+
+            return new UserService(new $repository);
         });
 
 

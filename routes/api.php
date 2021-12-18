@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/return' , [BookController::Class , 'show']);
 
-Route::post('/lent-book' , [UserController::Class , 'lending']);
+Route::get('/borrow' , [BookController::Class , 'borrow']);
 
-Route::get('/user' , [UserController::Class , 'show']);
+// Route::post('/lent-book' , [UserController::Class , 'lending']);
+
+// Route::get('/user' , [UserController::Class , 'show']);

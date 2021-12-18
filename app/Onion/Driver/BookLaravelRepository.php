@@ -16,6 +16,7 @@ class BookLaravelRepository implements BookRepositoryInterface{
 
     public function getById(int $id){
         return Book::find($id);
+        
     }
 
     public function get(int $id){

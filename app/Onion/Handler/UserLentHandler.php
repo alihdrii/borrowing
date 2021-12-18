@@ -21,9 +21,9 @@ class UserLentHandler{
     public function handle(){
 
         $user_id = $this->request->user_id;
-        $book_id = $this->request->book_id; 
+        $book_id = $this->request->book_id;
                                            
-        return (new BorrowBookUseCase(new UserExist(new UserLaravelRepository(), $user_id) , new BookExist(new BookLaravelRepository(), $book_id )))->lent();
+        // return (new BorrowBookUseCase(new UserExist(new UserLaravelRepository(), $user_id) , new BookExist(new BookLaravelRepository(), $book_id )))->lent();
 
     }
 }
