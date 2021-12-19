@@ -16,8 +16,6 @@ class BookService implements BookServiceInterface{
 
     public function show(int $book_id) 
     {
-        // return ' hele';
-        // dd($this->repository);
         if($this->exist($book_id))
              return $this->repository->get($book_id);
         return false;
@@ -27,9 +25,6 @@ class BookService implements BookServiceInterface{
     {
 
         if($this->repository->getById($book_id)){
-            // echo '<pre>';
-            // print_r($this->repository->getById($book_id));
-            dd('true');
             return true;
         }
         dd('false');

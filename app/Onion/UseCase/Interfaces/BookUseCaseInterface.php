@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 interface BookUseCaseInterface{
     
-    public function show(BookServiceInterface $instance , Request $request);
+    public function __construct(BookServiceInterface $service);
+    
+    public function __invoke();
 
 }

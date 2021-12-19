@@ -20,7 +20,7 @@ class BookHandler{
 
     public function returnBook()
     {
-        $book_service = App::make(BookServiceInterface::class);
+        // $book_service = App::make(BookServiceInterface::class);
         return (new BookUseCase())->show($book_service , $this->request);
     }
 
