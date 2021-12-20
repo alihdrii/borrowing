@@ -2,13 +2,11 @@
 
 namespace App\Onion\UseCase;
 
-use App\Onion\Driver\BookRepositoryInterface;
+use App\Onion\Driver\RequestInterface;
 use App\Onion\Service\BookServiceInterface;
-use App\Onion\Service\UserServiceInterface;
-use App\Onion\UseCase\Interfaces\BookUseCaseInterface;
-use Illuminate\Http\Request;
+use App\Onion\UseCase\Interfaces\GetBookListUseCaseInterface;
 
-class getBookListUseCase implements BookUseCaseInterface{
+class GetBookListUseCase implements GetBookListUseCaseInterface{
 
     private $service;
     
@@ -17,11 +15,11 @@ class getBookListUseCase implements BookUseCaseInterface{
         $this->service = $service;
     }
 
-    public function __invoke()
+    public function handle($request)
     {
-
-        if($this->service->exist(40)){
-            return $this->service->show(15);
+        $req_data = $request->data();
+        if($this->service->exist($req_data['book_id'])){
+            return $this->service->show($req_data['book_id']);
         }
  
     }

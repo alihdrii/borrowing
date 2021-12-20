@@ -8,4 +8,9 @@ interface BookServiceInterface {
 
     public function exist(int $book_id);
 
+    public function checkBorrowedBook($book_id , $user_id);
+
+    public function returnBook($book_id , $user_id);
+    
+
 }

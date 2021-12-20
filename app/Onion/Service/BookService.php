@@ -21,16 +21,23 @@ class BookService implements BookServiceInterface{
         return false;
     }
     
-    public function exist(int $book_id) : bool
+    public function exist(int $book_id)
     {
-
         if($this->repository->getById($book_id)){
             return true;
         }
-        dd('false');
-        
         return false;
     }
 
+    public function checkBorrowedBook($book_id , $user_id){
+        if($this->repository->getUserBorrowBook($book_id , $user_id)){
+            return true;
+        }
+        return false;
+    }
+
+    public function returnBook($book_id , $user_id){
+        $this->repository->returnBook($book_id , $user_id);
+    }
 
 }

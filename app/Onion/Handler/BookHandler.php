@@ -2,9 +2,13 @@
 
 namespace App\Onion\Handler;
 
+use App\Onion\Driver\RequestInterface;
+use App\Onion\Ioc;
 use App\Onion\Service\BookServiceInterface;
 use App\Onion\Service\UserServiceInterface;
 use App\Onion\UseCase\BookUseCase;
+use App\Onion\UseCase\BorrowBookUseCase;
+use App\Onion\UseCase\GetBookListUseCase;
 use App\Onion\UseCase\Interfaces\BookUseCaseInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -13,22 +17,27 @@ class BookHandler{
 
     private $request;
 
-    public function __construct($request)
+    public function __construct()
     {
-        $this->request = $request;
     }
 
-    public function returnBook()
+    public function getBook(RequestInterface $request)
+    {        
+        $use_case = Ioc::resolve()->getBookListUseCaseDependency();
+        return $use_case->handle($request);
+    }
+
+    public function borrowBook(RequestInterface $request)
     {
-        // $book_service = App::make(BookServiceInterface::class);
-        return (new BookUseCase())->show($book_service , $this->request);
+        $use_case = Ioc::resolve()->borrowBookUseCaseDependency();
+        return $use_case->handle($request);        
     }
 
-    public function borrowBook(){
-        $book_service = App::make(BookServiceInterface::class);
-        $user_service = App::make(UserServiceInterface::class);
-
-        return (new BookUseCase())->borrow($book_service , $user_service);
+    public function returnBook(RequestInterface $request)
+    {
+        $use_case = Ioc::resolve()->returnBookUseCaseDependency();
+        return $use_case();
     }
+
 
 }

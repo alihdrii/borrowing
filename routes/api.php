@@ -20,9 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/return' , [BookController::Class , 'show']);
+Route::get('/books' , [BookController::Class , 'show']);
 
-Route::get('/borrow' , [BookController::Class , 'borrow']);
+Route::post('/borrow' , [BookController::Class , 'borrow']);
+
+Route::get('/return' , [BookController::Class , 'return']);
 
 // Route::post('/lent-book' , [UserController::Class , 'lending']);
 

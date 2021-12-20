@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class BookElasticRepository implements BookRepositoryInterface{
 
+
     public function getAll()
     {
-        return ;
+        return Book::all()->toArray();
+    }
+
+    public function getById(int $id){
+        return Book::find($id);
     }
 
     public function get(int $id){
@@ -25,23 +30,46 @@ class BookElasticRepository implements BookRepositoryInterface{
         $book->publisher = $elequent->publisher;
         $book->isbn = $elequent->isbn;
         $book->published_at = $elequent->published_at;
-        return $book;
         
-    }
-
-    public function getById(int $id){
-        return Book::where('id' , $id)->get()->exist();
-        // return DB::table('books')->where('id', $id)->exists();
-
-        // return DB::table('books')->
+        return $book;
     }
 
     public function lentBook($request){
-        return ;
+
+        try{
+
+            $lent_elequent = new lent_book;
+
+            $lent_elequent->user_id = $request->user_id;
+            $lent_elequent->book_id = $request->book_id;
+            $lent_elequent->day_of_loan = $request->day_of_loan;
+            $lent_elequent->started_at = $request->started_at;
+    
+            $lent_elequent->save();
+            return true;
+    
+        } catch(\Exception $e){
+            return false;
+        }
+
     }
 
     public function checkLentBookByUserId($request){
-        return ;
+        if(lent_book::where('book_id' , $request->book_id)->exist()){
+            return true;
+        }
+        return false;
     }
+
+    public function getUserBorrowBook($user_id , $book_id){
+        return;
+    }
+
+    public function returnBook($user_id , $book_id){
+        return;
+    }
+
+
+
 
 }

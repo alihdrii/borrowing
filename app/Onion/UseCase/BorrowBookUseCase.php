@@ -3,28 +3,41 @@
 namespace App\Onion\UseCase ;
 
 use App\Onion\Driver\BookRepositoryInterface;
+use App\Onion\Service\BookServiceInterface;
 use App\Onion\Service\ServiceInterface;
+use App\Onion\Service\UserServiceInterface;
 use App\Onion\UseCase\Interfaces\BorrowUseCaseInterface;
+use Exception;
 
 class BorrowBookUseCase implements BorrowUseCaseInterface{
 
-    private $repository;
-    private $user_exist;
-    private $book_exist;
+    private $user_service;
+    private $book_service;
 
-    public function __construct(ServiceInterface $user_exist , ServiceInterface $book_exist)
+
+    public function __construct(BookServiceInterface $book_service , UserServiceInterface $user_service)
     {
-        $this->user_exist = $user_exist;
-        $this->book_exist = $book_exist;
+        $this->user_service = $user_service;
+        $this->book_service = $book_service;
     }
 
-    public function lent(){
+    public function handle($request)
+    {
 
-        if($this->user_exist->handle() && $this->book_exist->handle()){
-            
+        $req_data = $request->data();
+
+        if($this->user_service->exist($req_data['user_id']) && $this->user_service->libraryMember($req_data['user_id'])){
+            if($this->book_service->exist($req_data['book_id'])){
+                if($this->user_service->borrowedBookMoreThanCheck($req_data['book_id'] , 3)){
+                    if(!($this->user_service->borrowBook($req_data['user_id'] , $req_data['book_id'] , $req_data['started_at'] , $req_data['day_of_loan'])))
+                        throw new Exception("problem in borrowing book");
+                }
+                throw new Exception("user has more than maximum borrowed book");
+            }
+            throw new Exception("book Not Exist");
         }
-        return false;
-
+        throw new Exception("User Not Exist");
+        
     }
 
 }

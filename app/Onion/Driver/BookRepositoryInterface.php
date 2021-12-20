@@ -15,4 +15,7 @@ interface BookRepositoryInterface{
     
     public function checkLentBookByUserId($request);
 
+    public function getUserBorrowBook($user_id , $book_id);
+
+    public function returnBook($user_id , $book_id);
 }

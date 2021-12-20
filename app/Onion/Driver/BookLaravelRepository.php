@@ -15,8 +15,7 @@ class BookLaravelRepository implements BookRepositoryInterface{
     }
 
     public function getById(int $id){
-        return Book::find($id);
-        
+        return Book::find($id);        
     }
 
     public function get(int $id){
@@ -58,6 +57,14 @@ class BookLaravelRepository implements BookRepositoryInterface{
             return true;
         }
         return false;
+    }
+
+    public function getUserBorrowBook($user_id , $book_id){
+        return lent_book::where('book_id' , $book_id)->where('user-id' , $user_id)->get();            
+    }
+
+    public function returnBook($user_id , $book_id){
+        lent_book::where('book_id' , $book_id)->where('user-id' , $user_id)->delete();            
     }
 
 }
