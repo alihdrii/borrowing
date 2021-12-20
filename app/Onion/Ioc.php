@@ -29,7 +29,7 @@ class Ioc{
     {
 
         $book_service_repo = ($_SERVER['REQUEST_METHOD'] == 'get') ? new BookLaravelRepository() : new BookElasticRepository();
-        return 
+        return
             new GetBookListUseCase(
                 new BookService($book_service_repo)
             );
