@@ -10,6 +10,6 @@ interface ReturnBorrowedBookUseCaseIntereface{
     
     public function __construct(BookServiceInterface $book_service , UserServiceInterface $user_service , $book_id , $user_id);
     
-    public function handle(array $req);
+    public function handle( $req);
 
 }

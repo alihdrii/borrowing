@@ -17,6 +17,7 @@ class GetBookListUseCase implements GetBookListUseCaseInterface{
 
     public function handle($request)
     {
+
         $req_data = $request->data();
         if($this->service->exist($req_data['book_id'])){
             return $this->service->show($req_data['book_id']);

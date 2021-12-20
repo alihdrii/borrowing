@@ -11,7 +11,7 @@ interface BorrowUseCaseInterface{
     
     public function __construct( BookServiceInterface $b_s , UserServiceInterface $u_s);
 
-    public function handle(array $req);
+    public function handle($req);
 
 
 }

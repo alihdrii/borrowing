@@ -11,11 +11,21 @@ class BookLaravelRepository implements BookRepositoryInterface{
 
     public function getAll()
     {
-        return Book::all()->toArray();
+        // return Book::all()->toArray();
     }
 
     public function getById(int $id){
-        return Book::find($id);        
+        $elequent = Book::find($id);
+
+        $book = new EntityBook();
+
+        $book->setId($elequent->id);
+        $book->setName($elequent->name);
+        $book->setPublisher($elequent->publisher);
+        $book->setIsnb($elequent->isbn);
+        $book->setPublishedAt($elequent->published_at);
+        
+        return $book->body();
     }
 
     public function get(int $id){
@@ -23,21 +33,20 @@ class BookLaravelRepository implements BookRepositoryInterface{
         $elequent = Book::find($id);
 
         $book = new EntityBook();
-        $book->id = $elequent->id;
-        $book->name = $elequent->name;
-        $book->publisher = $elequent->publisher;
-        $book->isbn = $elequent->isbn;
-        $book->published_at = $elequent->published_at;
+
+        $book->setId($elequent->id);
+        $book->setName($elequent->name);
+        $book->setPublisher($elequent->publisher);
+        $book->setIsnb($elequent->isbn);
+        $book->setPublishedAt($elequent->published_at);
         
-        return $book;
+        return $book->body();
     }
 
     public function lentBook($request){
 
         try{
-
             $lent_elequent = new lent_book;
-
             $lent_elequent->user_id = $request->user_id;
             $lent_elequent->book_id = $request->book_id;
             $lent_elequent->day_of_loan = $request->day_of_loan;

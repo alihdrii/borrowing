@@ -26,17 +26,16 @@ class BorrowBookUseCase implements BorrowUseCaseInterface{
 
         $req_data = $request->data();
 
-        if($this->user_service->exist($req_data['user_id']) && $this->user_service->libraryMember($req_data['user_id'])){
-            if($this->book_service->exist($req_data['book_id'])){
-                if($this->user_service->borrowedBookMoreThanCheck($req_data['book_id'] , 3)){
-                    if(!($this->user_service->borrowBook($req_data['user_id'] , $req_data['book_id'] , $req_data['started_at'] , $req_data['day_of_loan'])))
-                        throw new Exception("problem in borrowing book");
-                }
-                throw new Exception("user has more than maximum borrowed book");
-            }
+        if( ! $this->user_service->exist($req_data['user_id']))
+            throw new Exception("User Not Exist");
+        if ( ! $this->book_service->exist($req_data['book_id']))
             throw new Exception("book Not Exist");
-        }
-        throw new Exception("User Not Exist");
+        if( ! $this->user_service->borrowedBookMoreThanCheck($req_data['book_id'] , 3))
+            throw new Exception("user has more than maximum borrowed book");
+        if( ! $this->user_service->borrowBook($req_data['user_id'] , $req_data['book_id'] , $req_data['started_at'] , $req_data['day_of_loan']))
+            throw new Exception("problem in borrowing book");
+
+        return true;
         
     }
 

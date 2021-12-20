@@ -10,6 +10,6 @@ interface GetBookListUseCaseInterface{
     
     public function __construct(BookServiceInterface $service);
     
-    public function handle(array $req);
+    public function handle( $req);
 
 }
